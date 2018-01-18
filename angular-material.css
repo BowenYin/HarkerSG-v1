@@ -18153,6 +18153,7 @@ md-toolbar {
 @media print {
   .hide-print:not(.show-print):not(.show) {
     display: none !important; } }
+
 /* Custom Styles */
 md-card .md-icon-button:not([disabled]) md-icon {
 	-webkit-transition-duration: 0.3s;
