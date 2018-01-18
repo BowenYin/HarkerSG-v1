@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html ng-app="App" lang="en">
+<head>
+  <title>Notes/Study Guides - BYTK</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Student-contributed notes and study guides for Harker Upper School courses.">
+  <meta name="author" content="Bowen Yin">
+  <meta name="viewport" content="width=device-width">
+  <link rel="shortcut icon" href="/images/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+  <link rel="stylesheet" type="text/css" href="/angular-material.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta name="google-signin-client_id" content="978510109102-3mompmb5s816pld0anjl213h1rqoldcn.apps.googleusercontent.com">
+  <meta name="google-signin-cookiepolicy" content="single_host_origin">
+  <meta name="google-signin-scope" content="profile email">
+</head>
+<body ng-controller="AppControl as ctrl" layout="column" ng-cloak>
+  <md-toolbar class="md-whiteframe-4dp">
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleLeftMenu()">
+        <md-icon>menu</md-icon>
+      </md-button>
+      <md-truncate flex>Notes / Study Guides</md-truncate>
+      <md-list-item id="user-info" flex="none" layout-align="end center" style="display: none;">
+        <img id="profile-pic" class="md-avatar" src="/images/profile-pic.jpg">
+        <span id="user-name" class="md-subhead"></span>
+        <md-menu class="md-secondary" md-offset="0 55">
+          <md-button class="md-icon-button"><md-icon class="material-icons">arrow_drop_down</md-icon></md-button>
+          <md-menu-content width="3">
+            <md-menu-item>
+              <md-button><md-icon>person</md-icon>Profile</md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button><md-icon>settings</md-icon>Settings</md-button>
+            </md-menu-item>
+            <md-menu-divider></md-menu-divider>
+            <md-menu-item>
+              <md-button onclick="signOut()"><md-icon>exit_to_app</md-icon>Sign Out</md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </md-list-item>
+      <div id="sign-in" class="g-signin2 md-button" data-width="100" data-onsuccess="onSignIn"></div>
+    </div>
+  </md-toolbar>
+  <section layout="row">
+    <md-sidenav md-component-id="left" class="md-sidenav-left" md-whiteframe="5">
+      <md-content layout-margin>
+        Left Navigation
+      </md-content>
+      <md-list>
+        <md-list-item ng-click="/">
+          <div class="md-list-item-content">
+            <md-icon layout-padding>settings</md-icon>
+            <span>Settings</span>
+          </div>
+        </md-list-item>
+      </md-list>
+    </md-sidenav>
+    <md-content flex>
+      <md-nav-bar>
+        <md-nav-item md-nav-href="#/!" name="home">Home</md-nav-item>
+        <md-nav-item md-nav-href="#!studyguides" name="studyguides">Study Guides</md-nav-item>
+      </md-nav-bar>
+      <md-content layout-margin>
+        <md-grid-list md-cols="1" md-cols-gt-xs="2" md-row-height="50px" md-gutter="15px">
+          <md-grid-tile md-rowspan="3">
+            <md-card layout-fill>hi</md-card>
+          </md-grid-tile>
+          <md-grid-tile md-rowspan="4" md-whiteframe="4">
+            <md-grid-tile-header>Header</md-grid-tile-header>
+            <md-grid-tile-footer>Footer</md-grid-tile-footer>
+          </md-grid-tile>
+        </md-grid-list>
+      </md-content>
+      <md-content class="md-padding" layout-xs="column" layout="row">
+        <div layout="column" flex>
+          <md-card onclick="alert('clicked')">
+            <md-card-header>
+              <md-card-avatar><img src="images/docs.png"></md-card-avatar>
+            </md-card-header>
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">Title</span>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+              <p>description</p>
+            </md-card-content>
+  					<md-card-actions layout="row" layout-align="end center">
+  						<md-button class="md-icon-button" onclick="like()">
+  							<md-icon>thumb_up</md-icon>
+  						</md-button>
+  						<span id="likes">0</span>
+  					</md-card-actions>
+          </md-card>
+          <md-card>card</md-card>
+          <md-card>
+            <md-card-header>
+              <md-card-avatar><img src="images/docs.png"></md-card-avatar>
+            </md-card-header>
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">Title</span>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+              <p>description</p>
+            </md-card-content>
+  					<md-card-actions layout="row" layout-align="end center">
+  						<md-button class="md-icon-button" onclick="like()">
+  							<md-icon>thumb_up</md-icon>
+  						</md-button>
+  						<span id="likes">0</span>
+  					</md-card-actions>
+          </md-card>
+          <md-card>
+            <md-card-header>
+              <md-card-avatar><img src="images/docs.png"></md-card-avatar>
+            </md-card-header>
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">Title</span>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+              <p>description</p>
+            </md-card-content>
+  					<md-card-actions layout="row" layout-align="end center">
+  						<md-button class="md-icon-button" onclick="like()">
+  							<md-icon>thumb_up</md-icon>
+  						</md-button>
+  						<span id="likes">0</span>
+  					</md-card-actions>
+          </md-card>
+        </div>
+        <div layout="column" flex>
+          <md-card>
+            <md-card-header onclick="alert('clicked')">
+              <md-card-avatar><img src="images/docs.png"></md-card-avatar>
+            </md-card-header>
+            <md-card-title onclick="alert('clicked')">
+              <md-card-title-text>
+                <span class="md-headline">Title</span>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-content onclick="alert('clicked')">
+              <p>description</p>
+            </md-card-content>
+  					<md-card-actions layout="row" layout-align="end center">
+  						<md-button class="md-icon-button" onclick="like()">
+  							<md-icon>thumb_up</md-icon>
+  						</md-button>
+  						<span id="likes">0</span>
+  					</md-card-actions>
+          </md-card>
+          <md-card>
+            <md-card-header>
+              <md-card-avatar><img src="images/docs.png"></md-card-avatar>
+            </md-card-header>
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">Title</span>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+              <p>description</p>
+            </md-card-content>
+  					<md-card-actions layout="row" layout-align="end center">
+  						<md-button class="md-icon-button" onclick="like()">
+  							<md-icon>thumb_up</md-icon>
+  						</md-button>
+  						<span id="likes">0</span>
+  					</md-card-actions>
+          </md-card>
+          <md-card>
+            <md-card-header>
+              <md-card-avatar><img src="images/docs.png"></md-card-avatar>
+            </md-card-header>
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">Title</span>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+              <p>description</p>
+            </md-card-content>
+  					<md-card-actions layout="row" layout-align="end center">
+  						<md-button class="md-icon-button" onclick="like()">
+  							<md-icon>thumb_up</md-icon>
+  						</md-button>
+  						<span id="likes">0</span>
+  					</md-card-actions>
+          </md-card>
+        </div>
+      </md-content>
+    </md-content>
+    <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="toggleRightMenu()">
+      <md-icon>add</md-icon>
+    </md-button>
+    <md-sidenav md-component-id="right" class="md-sidenav-right" md-is-locked-open="$mdMedia('gt-sm')" md-whiteframe="5">
+      <md-content layout-padding>
+        <h3 class="md-title">Add a Study Guide</h3>
+        <form name="addStudyGuide" action="https://script.google.com/macros/s/AKfycbz1zQLkjFcvEWnFdgD4r_NY5CPhrx9OJGBOK3-Rsp4nmZ5hmKQ/exec" method="post">
+          <md-input-container class="md-block" style="display: none;">
+            <input name="email" ng-model="form.email" aria-label="Email">
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Link to Study Guide</label>
+            <md-icon>link</md-icon>
+            <input name="link" ng-model="form.link" required md-no-asterisk min-length="3" ng-pattern="/^.+\..+$/">
+            <div ng-messages="addStudyGuide.link.$error">
+              <div ng-message="required">A URL is required.</div>
+              <div ng-message-exp="['minlength', 'pattern']">Please enter a valid URL.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Teacher</label>
+            <md-icon>person</md-icon>
+            <input name="teacher" ng-model="form.teacher" required md-no-asterisk>
+            <div ng-messages="addStudyGuide.teacher.$error">
+              <div ng-message="required">Teacher's name is required.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block md-icon-left">
+            <label>Test Date</label>
+            <md-icon>today</md-icon>
+            <md-datepicker ng-model="form.date" md-min-date="form.minDate" md-date-filter="ctrl.onlyWeekdays" md-open-on-focus md-hide-icons="calendar"></md-datepicker>
+            <div ng-messages="addStudyGuide.date.$error">
+              <div ng-message="valid">Invalid date format.</div>
+              <div ng-message="mindate">Date has passed.</div>
+            </div>
+          </md-input-container>
+          <div class="g-recaptcha" data-sitekey="6LewlykUAAAAADryEgbjRGGhl3S0qQphZAScaeFy"></div>
+          <md-button type="submit" class="md-primary md-raised">Submit</md-button>
+        </form>
+      </md-content>
+    </md-sidenav>
+  </section>
+  <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
+  <script>
+    var config = {
+      apiKey: "AIzaSyDvbUDSwqXI2mcfPRDKl1Z3OA5EpCCf0YE",
+      authDomain: "bowenyin-tk.firebaseapp.com",
+      databaseURL: "https://bowenyin-tk.firebaseio.com",
+      projectId: "bowenyin-tk",
+      storageBucket: "bowenyin-tk.appspot.com",
+      messagingSenderId: "978510109102"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script src="/__/firebase/4.5.0/firebase-app.js"></script>
+  <script src="/__/firebase/4.5.0/firebase-auth.js"></script>
+  <script src="/__/firebase/4.5.0/firebase-database.js"></script>
+  <script src="/__/firebase/4.5.0/firebase-messaging.js"></script>
+  <script src="/__/firebase/4.5.0/firebase-storage.js"></script>
+  <script src="/__/firebase/4.5.0/firebase-firestore.js"></script>
+  <script src="/__/firebase/init.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-aria.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-route.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-messages.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js"></script>
+  <script src="/firebase.js"></script>
+  <script src="/studyguides.js"></script>
+  <script type="text/javascript">
+    var app = angular.module("App", ["ngMaterial", "ngMessages", "ngRoute"]);
+    app.controller("AppControl", function($scope, $mdSidenav) {
+      $scope.toggleLeftMenu = function() {
+        $mdSidenav("left").toggle();
+      };
+      $scope.toggleRightMenu = function() {
+        $mdSidenav("right").toggle();
+      };
+      $scope.form = {
+        minDate: new Date()
+      };
+      $scope.navItem = "home";
+      this.onlyWeekdays = function(date) {
+        var day=date.getDay();
+        return day!==0 && day!==6;
+      };
+    });
+    app.config(function($mdThemingProvider) {
+      $mdThemingProvider.theme("default")
+      .primaryPalette("blue", {
+        "default": "800"
+      })
+      .accentPalette("orange");
+      $mdThemingProvider.enableBrowserColor();
+    });
+    app.config(function($routeProvider) {
+      $routeProvider
+      .when("/", {
+          templateUrl: "index.html"
+      })
+      .when("/studyguides", {
+          templateUrl: "studyguides.html"
+      });
+    });
+  </script>
+  <script>
+    $("md-card").hover(
+    function() {$(this).addClass("md-whiteframe-5dp");},
+    function() {$(this).removeClass("md-whiteframe-5dp");}
+  );
+  </script>
+</body>
+</html>
