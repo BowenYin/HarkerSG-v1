@@ -42,10 +42,14 @@
     </md-list-item>
     <md-content>
 			<md-list>
-				<md-list-item ng-href="/settings" ng-click="toggleLeftMenu()" ng-click="reset()">
+				<md-list-item ng-href="/settings" ng-click="toggleLeftMenu(); reset();">
 					<div class="md-list-item-content">
-						<md-icon layout-padding>settings</md-icon>
-						<span>Settings</span>
+						<md-icon layout-padding>settings</md-icon><span>Settings</span>
+					</div>
+				</md-list-item>
+				<md-list-item ng-href="/ads" ng-click="toggleLeftMenu(); reset();">
+					<div class="md-list-item-content">
+						<md-icon layout-padding>forum</md-icon><span>Advertisements</span>
 					</div>
 				</md-list-item>
 			</md-list>
