@@ -7,13 +7,11 @@ app.controller("NFControl", function($rootScope) {
   $rootScope.navItem=null;
   $rootScope.pageTitle="404 Page Not Found";
   $rootScope.tabName="Page Not Found - HarkerSG";
-  document.getElementsByTagName("md-nav-ink-bar")[0].style.display="none";
 });
 app.controller("SettingsControl", function($rootScope, $scope, $mdToast) {
-  $rootScope.navItem=null;
+  $rootScope.navItem=null
   $rootScope.pageTitle="User Settings";
   $rootScope.tabName="Settings - HarkerSG";
-  document.getElementsByTagName("md-nav-ink-bar")[0].style.display="none";
   var cookies=document.cookie.split("; ");
   for (var i=0; i<cookies.length; i++) {
     if (cookies[i].split("=")[0]=="dark")
@@ -118,5 +116,4 @@ app.controller("AdsControl", function($scope, $rootScope) {
   $rootScope.navItem=null;
   $rootScope.pageTitle="Submit an Advertisement";
   $rootScope.tabName="Advertisements - HarkerSG";
-  document.getElementsByTagName("md-nav-ink-bar").style.display="none";
 });

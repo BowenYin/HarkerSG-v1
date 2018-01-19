@@ -31,7 +31,7 @@
             <md-button disabled><md-icon>person</md-icon>Profile</md-button>
           </md-menu-item>
           <md-menu-item>
-            <md-button ng-href="/settings"><md-icon>settings</md-icon>Settings</md-button>
+            <md-button ng-href="/settings" ng-click="reset()"><md-icon>settings</md-icon>Settings</md-button>
           </md-menu-item>
           <md-menu-divider></md-menu-divider>
           <md-menu-item>
@@ -42,7 +42,7 @@
     </md-list-item>
     <md-content>
 			<md-list>
-				<md-list-item ng-href="/settings" ng-click="toggleLeftMenu()">
+				<md-list-item ng-href="/settings" ng-click="toggleLeftMenu()" ng-click="reset()">
 					<div class="md-list-item-content">
 						<md-icon layout-padding>settings</md-icon>
 						<span>Settings</span>
@@ -51,7 +51,7 @@
 			</md-list>
       <div layout-padding layout-margin>
   			<code>v2.0</code>
-  			<div align="center" id="copyright" class="md-button"><md-icon>code</md-icon> 2017 by Bowen Yin</div>
+  			<div align="center" id="copyright" class="md-button"><md-icon>code</md-icon> 2018 by Bowen Yin</div>
       </div>
   </md-content>
   </md-sidenav>
@@ -76,7 +76,7 @@
                 <md-button disabled><md-icon>person</md-icon>Profile</md-button>
               </md-menu-item>
               <md-menu-item>
-                <md-button ng-href="/settings"><md-icon>settings</md-icon>Settings</md-button>
+                <md-button ng-href="/settings" ng-click="reset()"><md-icon>settings</md-icon>Settings</md-button>
               </md-menu-item>
               <md-menu-divider></md-menu-divider>
               <md-menu-item>
@@ -141,12 +141,15 @@
     app.controller("MainControl", function($scope, $mdSidenav, $mdDialog) {
       $scope.settings=[];
       $scope.email="";
-      $scope.toggleLeftMenu = function() {
+      $scope.toggleLeftMenu=function() {
         $mdSidenav("left").toggle();
       };
-      $scope.toggleRightMenu = function() {
+      $scope.toggleRightMenu=function() {
         $mdSidenav("right").toggle();
       };
+			$scope.reset=function() {
+				$scope.navItem=null;
+			};
       auth.onAuthStateChanged(function(user) {
         if (user) {
           $scope.signedIn=true;
